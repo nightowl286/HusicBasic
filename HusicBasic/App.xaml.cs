@@ -17,10 +17,6 @@ using DryIoc;
 using Prism.Common;
 using Prism.Services.Dialogs;
 using HusicBasic.Models;
-using HusicBasic.Views.Dialogs;
-using HusicBasic.ViewModels.Dialogs;
-using HusicBasic.ViewModels.Dialogs.AddSong;
-using HusicBasic.Views.Dialogs.AddSong;
 using HusicBasic.Services.Interfaces;
 using HusicBasic.Models.Tasks;
 using System.IO;
@@ -82,7 +78,6 @@ namespace HusicBasic
             ViewModelLocationProvider.Register<MiniPlayer, MainPlayerViewModel>();
             ViewModelLocationProvider.Register<MainPlayerVolumeControls, MainPlayerViewModel>();
             ViewModelLocationProvider.Register<MainPlayerControls, MainPlayerViewModel>();
-            ViewModelLocationProvider.Register<AddSongMethodView, AddSongMethodViewViewModel>();
             ViewModelLocationProvider.Register<CurrentTaskView, CurrentTaskViewViewModel>();
             //ViewModelLocationProvider.Register<AddSongMethodView, AddSongMethodViewViewModel>();
 
@@ -122,13 +117,7 @@ namespace HusicBasic
         }
         private void RegisterDialogs(IContainerRegistry container, IRegionManager manager)
         {
-            container.RegisterDialog<AddSongDialog, AddSongDialogViewModel>("AddSong");
-            container.RegisterForNavigation<AddSongMethodView>();
-            container.RegisterForNavigation<AddSongMethodYoutube, AddSongMethodYoutubeViewModel>();
-
-            container.RegisterDialog<ConfirmationDialog, ConfirmationDialogViewModel>("Confirmation");
-            container.RegisterDialog<RemoveConfirmationDialog, RemoveConfirmationDialogViewModel>("RemoveConfirmation");
-            container.RegisterDialogWindow<PopupDialog>("Popup");
+           
         }
         private void CreateGlobalCommands(IDialogService dialogService)
         {
@@ -209,7 +198,7 @@ namespace HusicBasic
         private void SplashModel_TasksFinished()
         {
             Dispatcher.Invoke(() => {
-                //AttemptShowMainWindow();
+                AttemptShowMainWindow();
 
                 _Splash.Close();
                 _Splash = null;

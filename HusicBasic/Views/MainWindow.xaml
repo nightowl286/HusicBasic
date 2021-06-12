@@ -50,16 +50,5 @@
             <views:MainPlayerControls Margin="5,5" VerticalAlignment="Bottom"/>
         </Border>
         <ContentControl Grid.Column="1" x:Name="mainRegionControl" FocusVisualStyle="{x:Null}" Grid.RowSpan="3" Margin="10" prism:RegionManager.RegionName="MainRegion"/>
-        <views:PopupDialogHost Grid.ColumnSpan="3" Grid.RowSpan="4" Margin="-10">
-            <views:PopupDialogHost.Style>
-                <Style TargetType="{x:Type views:PopupDialogHost}">
-                    <Style.Triggers>
-                        <Trigger Property="comp:DesignerProperties.IsInDesignMode" Value="True">
-                            <Setter Property="Visibility" Value="Collapsed"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </views:PopupDialogHost.Style>
-        </views:PopupDialogHost>
     </Grid>
 </Window>
