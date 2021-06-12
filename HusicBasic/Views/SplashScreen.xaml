@@ -1,0 +1,74 @@
+﻿<Window x:Class="HusicBasic.Views.SplashScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True" ShowInTaskbar="False" ShowActivated="True" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Width="384" Height="384" Background="Transparent">
+    <Border Margin="10">
+        <Grid>
+            <Grid.Resources>
+                <BounceEase x:Key="imageEasing" EasingMode="EaseInOut" Bounces="10" Bounciness="2"/>
+            </Grid.Resources>
+            <Border Background="{DynamicResource SplashBackground}" Effect="{DynamicResource WindowShadow}" CornerRadius="15"/>
+            <Image Source="{DynamicResource LogoFrame}"/>
+            <Image Source="{DynamicResource LogoCoverLeft}" RenderTransformOrigin="0.224,0.632">
+                <Image.RenderTransform>
+                    <TranslateTransform/>
+                </Image.RenderTransform>
+                <Image.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.X)" To="{Binding LeftOffsetX}"
+                                                     From="{Binding LeftStartX}" Duration="0:0:1" 
+                                                     AutoReverse="True" RepeatBehavior="Forever" EasingFunction="{DynamicResource imageEasing}"/>
+                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.Y)" To="{Binding OffsetY}" 
+                                                     From="{Binding StartY}" Duration="0:0:1"
+                                                     AutoReverse="True" RepeatBehavior="Forever" EasingFunction="{DynamicResource imageEasing}"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Image.Triggers>
+            </Image>
+            <Image Source="{DynamicResource LogoCoverRight}" RenderTransformOrigin="0.776,0.632">
+                <Image.RenderTransform>
+                    <TranslateTransform/>
+                </Image.RenderTransform>
+                <Image.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.X)" To="{Binding RightOffsetX}"
+                                                     From="{Binding RightStartX}" Duration="0:0:1" 
+                                                     AutoReverse="True" RepeatBehavior="Forever" EasingFunction="{DynamicResource imageEasing}"/>
+                                    <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(TranslateTransform.Y)" To="{Binding OffsetY}" 
+                                                     From="{Binding StartY}" Duration="0:0:1"
+                                                     AutoReverse="True" RepeatBehavior="Forever" EasingFunction="{DynamicResource imageEasing}"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Image.Triggers>
+            </Image>
+
+            <Grid Height="60" VerticalAlignment="Bottom" Margin="20,0,20,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="60"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock FontFamily="{StaticResource FiraSans}" FontSize="14" Text="{Binding ProgressStatus}" 
+                           Foreground="{StaticResource Brush.Text}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis"/>
+                <TextBlock Grid.Column="2" FontFamily="{StaticResource FiraSans}" FontSize="24" Foreground="{StaticResource Brush.Text}" 
+                           Text="{Binding ProgressText}" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+
+                <ProgressBar Grid.Row="1" Grid.ColumnSpan="2" IsIndeterminate="{Binding ProgressUnknown}" Value="{Binding Progress, Mode=OneWay}" Maximum="{Binding Max, Mode=OneWay}" Style="{StaticResource mainProgress}"/>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

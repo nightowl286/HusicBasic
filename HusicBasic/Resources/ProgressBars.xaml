@@ -1,0 +1,99 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:HusicBasic">
+    
+    <Style x:Key="mainProgress" TargetType="{x:Type ProgressBar}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ProgressBar}">
+                    <Grid MinHeight="14" MinWidth="200">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Determinate" />
+                                <VisualState x:Name="Indeterminate">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Duration="00:00:00" Storyboard.TargetName="PART_Indicator" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <SolidColorBrush>Transparent</SolidColorBrush>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Duration="00:00:00" Storyboard.TargetName="PART_GlowRect" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <SolidColorBrush Color="{DynamicResource Color.Accent}"/>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="PART_Track" CornerRadius="3" BorderThickness="0" SnapsToDevicePixels="True" UseLayoutRounding="True" Background="{DynamicResource Brush.Background}"/>
+                        <Border x:Name="PART_Indicator" CornerRadius="2" BorderThickness="0" HorizontalAlignment="Left" Background="{TemplateBinding Foreground}" Margin="1">
+                            <Grid ClipToBounds="True" x:Name="Animation">
+                                <Border x:Name="PART_GlowRect" Width="100" HorizontalAlignment="Left" Margin="-100,0,0,0" Background="Transparent"/>
+                            </Grid>
+                        </Border>
+                        <Border CornerRadius="2" BorderBrush="{TemplateBinding Background}" BorderThickness="2" SnapsToDevicePixels="True"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background" Value="{DynamicResource Brush.Background.Tint(8.2)}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Accent}"/>
+    </Style>
+
+    <Style x:Key="smallProgress" TargetType="{x:Type ProgressBar}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ProgressBar}">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Determinate" />
+                                <VisualState x:Name="Indeterminate">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Duration="00:00:00" Storyboard.TargetName="PART_Indicator" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <SolidColorBrush>Transparent</SolidColorBrush>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Duration="00:00:00" Storyboard.TargetName="PART_GlowRect" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <SolidColorBrush Color="{DynamicResource Color.Accent}"/>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="PART_Track"  BorderThickness="0" SnapsToDevicePixels="True" UseLayoutRounding="True" Background="{DynamicResource Brush.Background.Tint(3.88)}"/>
+                        <Border x:Name="PART_Indicator" BorderThickness="0" HorizontalAlignment="Left" Background="{TemplateBinding Foreground}">
+                            <Grid ClipToBounds="True" x:Name="Animation">
+                                <Border x:Name="PART_GlowRect" Width="100" HorizontalAlignment="Left" Margin="-100,0,0,0">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#05d7d7d7" Offset="0.1"/>
+                                            <GradientStop Color="#0ad7d7d7" Offset="0.4"/>
+                                            <GradientStop Color="#0ad7d7d7" Offset="0.6"/>
+                                            <GradientStop Color="#05d7d7d7" Offset="0.9"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background" Value="{DynamicResource Brush.Background.Tint(8.2)}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Accent}"/>
+    </Style>
+    
+</ResourceDictionary>

@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="HusicBasic.Views.SongListOverview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             xmlns:models="clr-namespace:HusicBasic.Models"
+             xmlns:views="clr-namespace:HusicBasic.Views"
+             xmlns:vms="clr-namespace:HusicBasic.ViewModels"
+             xmlns:local="clr-namespace:HusicBasic"
+             prism:ViewModelLocator.AutoWireViewModel="True" HorizontalAlignment="Stretch" Focusable="False">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vms:SongViewViewModel}">
+            <views:SongView/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,5" Grid.Row="1" FocusVisualStyle="{x:Null}" Style="{DynamicResource ScrollViewer}">
+            <ItemsControl ItemsSource="{Binding Path=Songs, Mode=OneWay}" Margin="5" FocusVisualStyle="{x:Null}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <Border Background="{DynamicResource Brush.Background.Tint(3.88)}" Margin="0,0,0,5" CornerRadius="15" Effect="{DynamicResource SmallShadow}"/>
+        <Grid Margin="10,10,10,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MaxWidth="450"/>
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <local:TextboxHint Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Hint="Search songs" Height="30"/>
+                    <Button Grid.Column="1" Style="{DynamicResource Button.Asset}" Content="{DynamicResource Text.Plus}" Height="25" Width="25" FontSize="20" ToolTip="Add new song" Command="{Binding ShowAddSongPopup}" Margin="10,0"/>
+                </Grid>
+            </Grid>
+    </Grid>
+</UserControl>

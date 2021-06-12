@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="HusicBasic.Views.CurrentTaskView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:views="clr-namespace:HusicBasic.Views"
+             xmlns:vm="clr-namespace:HusicBasic.ViewModels"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:TaskViewViewModel}">
+            <views:TaskView/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid>
+            <Grid.Style>
+                <Style TargetType="{x:Type Grid}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding HasTask}" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <ContentPresenter Content="{Binding Current}"/>
+        </Grid>
+    </Grid>
+</UserControl>

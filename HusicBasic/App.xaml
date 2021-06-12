@@ -1,0 +1,135 @@
+﻿<prism:PrismApplication x:Class="HusicBasic.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:HusicBasic"
+             xmlns:prism="http://prismlibrary.com/" 
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:diagnostic="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+             xmlns:tb="http://www.hardcodet.net/taskbar"
+             ShutdownMode="OnExplicitShutdown">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <Color x:Key="Color.Accent">#ad3b3b</Color>
+                    <Color x:Key="Color.Accent.Shade(37.5)">#6c2525</Color>
+                    <Color x:Key="Color.Accent.Shade">#973333</Color>
+                    <Color x:Key="Color.Accent.Tint(5)">#b14444</Color>
+                    <Color x:Key="Color.Accent.Tint(12.5)">#b75353</Color>
+                    <Color x:Key="Color.Background">#171717</Color>
+                    <Color x:Key="Color.Background.Tint(3.88)">#202020</Color>
+                    <Color x:Key="Color.Background.Tint(5)">#222222</Color>
+                    <Color x:Key="Color.Background.Tint(8.2)">#2a2a2a</Color>
+                    <Color x:Key="Color.Background.Tint(12.5)">#343434</Color>
+                    <Color x:Key="Color.Background.Tint(17)">#3e3e3e</Color>
+                    <Color x:Key="Color.Background.Tint(30)">#454545</Color>
+                    <Color x:Key="Color.Text">#d7d7d7</Color>
+                    <Color x:Key="Color.Text.Tint(100)">#ffffff</Color>
+                    <Color x:Key="Color.Text.Shade(25)">#a1a1a1</Color>
+                    <Color x:Key="Color.Text.Shade(50)">#6b6b6b</Color>
+                    <Color x:Key="Color.Text.Shade(25).Tint(50)">#d0d0d0</Color>
+                    <Color x:Key="Color.Text.Shade(25).Tint(87.5)">#f3f3f3</Color>
+                    <Color x:Key="Color.Red">#ad3b3b</Color>
+                    <Color x:Key="Color.Green">#3bad3b</Color>
+
+                    <Color x:Key="Color.Link">#1e5a99</Color>
+                    <Color x:Key="Color.Link.Tint(25)">#4d96e2</Color>
+
+
+                    <SolidColorBrush x:Key="Brush.Background" Color="{DynamicResource Color.Background}"/>
+                    <SolidColorBrush x:Key="Brush.Background.Tint(3.88)" Color="{DynamicResource Color.Background.Tint(3.88)}"/>
+                    <SolidColorBrush x:Key="Brush.Background.Tint(5)" Color="{DynamicResource Color.Background.Tint(5)}"/>
+                    <SolidColorBrush x:Key="Brush.Background.Tint(8.2)" Color="{DynamicResource Color.Background.Tint(8.2)}"/>
+                    <SolidColorBrush x:Key="Brush.Background.Tint(12.5)" Color="{DynamicResource Color.Background.Tint(12.5)}"/>
+                    <SolidColorBrush x:Key="Brush.Background.Tint(17)" Color="{DynamicResource Color.Background.Tint(17)}"/>
+                    <SolidColorBrush x:Key="Brush.Background.Tint(30)" Color="{DynamicResource Color.Background.Tint(30)}"/>
+                    <SolidColorBrush x:Key="Brush.Text" Color="{DynamicResource Color.Text}"/>
+                    <SolidColorBrush x:Key="Brush.Text.Tint(100)" Color="{DynamicResource Color.Text.Tint(100)}"/>
+                    <SolidColorBrush x:Key="Brush.Text.Shade(25)" Color="{DynamicResource Color.Text.Shade(25)}"/>
+                    <SolidColorBrush x:Key="Brush.Text.Shade(50)" Color="{DynamicResource Color.Text.Shade(50)}"/>
+                    <SolidColorBrush x:Key="Brush.Text.Shade(25).Tint(50)" Color="{DynamicResource Color.Text.Shade(25).Tint(50)}"/>
+                    <SolidColorBrush x:Key="Brush.Text.Shade(25).Tint(87.5)" Color="{DynamicResource Color.Text.Shade(25).Tint(87.5)}"/>
+                    <SolidColorBrush x:Key="Brush.Link" Color="{DynamicResource Color.Link}"/>
+                    <SolidColorBrush x:Key="Brush.Link.Tint(25)" Color="{DynamicResource Color.Link.Tint(25)}"/>
+
+                    <SolidColorBrush x:Key="Brush.Accent" Color="{DynamicResource Color.Accent}"/>
+                    <SolidColorBrush x:Key="Brush.Accent.Dark" Color="{DynamicResource Color.Accent.Shade(37.5)}"/>
+                    <SolidColorBrush x:Key="Brush.Accent.Tint(5)" Color="{DynamicResource Color.Accent.Tint(5)}"/>
+                    <SolidColorBrush x:Key="Brush.Accent.Shade" Color="{DynamicResource Color.Accent.Shade}"/>
+                    <SolidColorBrush x:Key="Brush.Accent.Tint(12.5)" Color="{DynamicResource Color.Accent.Tint(12.5)}"/>
+
+                    <SolidColorBrush x:Key="Brush.Red" Color="{DynamicResource Color.Red}"/>
+                    <SolidColorBrush x:Key="Brush.Green" Color="{DynamicResource Color.Green}"/>
+
+
+                    <DropShadowEffect x:Key="WindowShadow" Direction="315" ShadowDepth="1" Color="{DynamicResource Color.Background}"  BlurRadius="10"/>
+                    <DropShadowEffect x:Key="SmallShadow" ShadowDepth="1"/>
+
+                    <local:FirstDegreeConverter x:Key="FirstDegreeFunction"/>
+                    <local:BoolToVisibilityCollapsedConverter x:Key="BoolToCollapsed"/>
+
+                    <LinearGradientBrush x:Key="SplashBackground" StartPoint="0,1" EndPoint="1,0">
+                        <GradientStop Offset="0.5" Color="{DynamicResource Color.Accent}"/>
+                        <GradientStop Offset="0.5" Color="{DynamicResource Color.Accent.Shade(37.5)}"/>
+                    </LinearGradientBrush>
+
+
+                    <Style x:Key="Link" TargetType="{x:Type Hyperlink}">
+                        <Setter Property="Foreground" Value="{DynamicResource Brush.Link}"/>
+                        <Setter Property="Focusable" Value="False"/>
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                        <Setter Property="TextDecorations" Value=""/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="{DynamicResource Brush.Link.Tint(25)}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+
+                    <Grid x:Key="LogoCircle" x:Shared="true" FocusVisualStyle="{x:Null}" UseLayoutRounding="False" SnapsToDevicePixels="False">
+                        <Ellipse Fill="{DynamicResource SplashBackground}">
+                            <Ellipse.Effect>
+                                <DropShadowEffect ShadowDepth="3"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+                        <Image Source="{DynamicResource LogoFrame}" RenderOptions.EdgeMode="Aliased" RenderOptions.ClearTypeHint="Enabled" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <Image Source="{DynamicResource LogoCoverLeft}" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.ClearTypeHint="Enabled" RenderOptions.EdgeMode="Aliased"/>
+                        <Image Source="{DynamicResource LogoCoverRight}" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.ClearTypeHint="Enabled" RenderOptions.EdgeMode="Aliased"/>
+                    </Grid>
+
+                    <Grid x:Key="NotifyIcon.ToolTip" Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Border Effect="{DynamicResource SmallShadow}" Margin="-5" Background="{DynamicResource Brush.Background}" CornerRadius="10"/>
+                        <TextBlock Text="{Binding SongNameSafe}" Foreground="{DynamicResource Brush.Text}"/>
+                    </Grid>
+
+                    <Style x:Key="NotifyIconStyle" TargetType="{x:Type tb:TaskbarIcon}">
+                        <Setter Property="DoubleClickCommand" Value="{Binding ShowMainPlayerCommand}"/>
+                        <Setter Property="TrayToolTip" Value="{DynamicResource NotifyIcon.ToolTip}"/>
+                        <Setter Property="IconSource" Value="/icon.ico"/>
+                        <Setter Property="ToolTipText" Value="{Binding SongNameSafe}"/>
+                        <Setter Property="ContextMenu">
+                            <Setter.Value>
+                                <ContextMenu>
+                                    <MenuItem Header="Show Husic mini" Command="{Binding ShowMiniPlayerCommand}"/>
+                                    <Separator/>
+                                    <MenuItem Header="Exit" Command="{Binding ExitCommand}"/>
+                                </ContextMenu>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary Source="Resources/Images.xaml"/>
+                <ResourceDictionary Source="Resources/Fonts.xaml"/>
+                <ResourceDictionary Source="Resources/AssetStrings.xaml"/>
+                <ResourceDictionary Source="Resources/Buttons.xaml"/>
+                <ResourceDictionary Source="Resources/ProgressBars.xaml"/>
+                <ResourceDictionary Source="Resources/Sliders.xaml"/>
+                <ResourceDictionary Source="Resources/ScrollBars.xaml"/>
+                <ResourceDictionary Source="Resources/ScrollViewers.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</prism:PrismApplication>

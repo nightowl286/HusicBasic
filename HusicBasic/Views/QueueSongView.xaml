@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="HusicBasic.Views.QueueSongView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HusicBasic.Views"
+             mc:Ignorable="d" Name="thisElem">
+    <Border CornerRadius="5" Margin="2" Padding="5" FocusVisualStyle="{x:Null}">
+        <Border.InputBindings>
+            <MouseBinding MouseAction="LeftClick" Command="{Binding PlaySongCommand}"/>
+        </Border.InputBindings>
+        <Border.Style>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="Background" Value="{DynamicResource Brush.Background.Tint(12.5)}"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsPlaying}" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource Brush.Background.Tint(30)}"/>
+                        <Setter Property="Cursor" Value="Arrow"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Foreground="{DynamicResource Brush.Text.Shade(25)}" Padding="0,0,5,0" VerticalAlignment="Center" FontFamily="{DynamicResource fntAssets}">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Text" Value=""/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsPlaying}" Value="True">
+                                <Setter Property="Text" Value=""/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock Grid.Column="1" TextTrimming="CharacterEllipsis" TextAlignment="Left" Text="{Binding Title}" ToolTip="{Binding Title}">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Foreground" Value="{DynamicResource Brush.Text}"/>
+                        <Setter Property="FontWeight" Value="Regular"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsPlaying}" Value="True">
+                                <!--<Setter Property="Foreground" Value="{DynamicResource Brush.Background}"/>-->
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Border Visibility="{Binding ShowRemoveButton}" Grid.Column="2">
+                <Button FontSize="10" Visibility="{Binding ElementName=thisElem, Path=IsMouseOver, Converter={StaticResource BoolToCollapsed}}" Style="{DynamicResource Button.Icon}" Content="{DynamicResource Text.Close}" Command="{Binding RemoveFromSection}"/>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>
