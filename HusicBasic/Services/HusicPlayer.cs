@@ -22,6 +22,7 @@ namespace HusicBasic.Services
         private TimeSpan _CurrentDuration;
         private bool _IsPaused;
         private SongModel _CurrentSong;
+        private SongModel _LastSong;
         private bool _IsPlaying;
         private readonly DispatcherTimer _PositionTimer;
         private readonly IHusicSettings Settings;
@@ -135,6 +136,18 @@ namespace HusicBasic.Services
         private void SongChanged()
         {
             UpdatePositionAndDurationInfo();
+            if (_LastSong != null)
+                _LastSong.PropertyChanged -= CurrentSong_PropertyChanged;
+            _LastSong = CurrentSong;
+
+            _LastSong.PropertyChanged += CurrentSong_PropertyChanged;
+        }
+        private void CurrentSong_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(SongModel.Path))
+            {
+                PlaySong(CurrentSong);
+            }
         }
         private void _PositionTimer_Tick(object sender, EventArgs e) => RaisePropertyChanged(nameof(Position));
         private void _Player_MediaEnded(object sender, EventArgs e)

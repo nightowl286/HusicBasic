@@ -45,16 +45,10 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Foreground="{DynamicResource Brush.Text}" FontWeight="Medium" Text="Source" VerticalAlignment="Center"/>
                 <TextBlock Foreground="{DynamicResource Brush.Text.Shade(50)}" HorizontalAlignment="Left" Margin="3,0" VerticalAlignment="Center" ToolTip="{Binding Source}" Text="{Binding Source}" TextTrimming="CharacterEllipsis" Grid.Column="1"/>
-                <Button Content="Change" Grid.Column="2" Padding="7,5" ToolTipService.ShowOnDisabled="True">
+                <Button Content="Change" Grid.Column="2" Command="{Binding ChangeSourceCommand}" Padding="7,5" ToolTipService.ShowOnDisabled="True">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}" BasedOn="{StaticResource Button.Secondary}">
                             <Setter Property="ToolTip" Value="{x:Null}"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding YoutubeID}" Value="">
-                                    <Setter Property="IsEnabled" Value="False"/>
-                                    <Setter Property="ToolTip" Value="Cannot change the source of youtube song"/>
-                                </DataTrigger>
-                            </Style.Triggers>
                         </Style>
                     </Button.Style>
                 </Button>

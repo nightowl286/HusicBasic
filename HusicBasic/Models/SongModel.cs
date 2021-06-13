@@ -34,7 +34,7 @@ namespace HusicBasic.Models
 
         #region Properties
         public uint ID { get => _ID; private set => SetProperty(ref _ID, value); }
-        public Uri Path { get => _Path; private set => SetProperty(ref _Path, value); }
+        public Uri Path { get => _Path; set => SetProperty(ref _Path, value); }
         public string Title { get => _Title; set => SetProperty(ref _Title, value); }
         public TimeSpan Duration { get => _Duration; private set => SetProperty(ref _Duration, value); }
         public string YoutubeID { get => _YoutubeID; private set => SetProperty(ref _YoutubeID, value); }
