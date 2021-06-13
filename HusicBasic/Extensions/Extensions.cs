@@ -162,14 +162,14 @@ namespace HusicBasic
             param.Add("message", message);
             service.Show("Confirmation", param, callback, "Popup");
         }
-        public static void ShowRemoveConfirm(this IDialogService service, Action<IDialogResult> callback, SongModel song)
+        public static void ConfirmDeletion(this IDialogService service, Action<IDialogResult> callback, SongModel song)
         {
             string extra = string.IsNullOrWhiteSpace(song.YoutubeID) ? null : "This will also remove the source file.";
-            ShowRemoveConfirm(service, callback, "song", song.Title, extra);
+            ConfirmDeletion(service, callback, "song", song.Title, extra);
         }
-        public static void ShowRemoveConfirm(this IDialogService service, Action<IDialogResult> callback, string type, string name)
-            => ShowRemoveConfirm(service, callback, type, name, null);
-        public static void ShowRemoveConfirm(this IDialogService service, Action<IDialogResult> callback, string type, string name, string extra)
+        public static void ConfirmDeletion(this IDialogService service, Action<IDialogResult> callback, string type, string name)
+            => ConfirmDeletion(service, callback, type, name, null);
+        public static void ConfirmDeletion(this IDialogService service, Action<IDialogResult> callback, string type, string name, string extra)
         {
             DialogParameters param = new DialogParameters
             {
@@ -178,7 +178,7 @@ namespace HusicBasic
             };
             if (!string.IsNullOrWhiteSpace(extra))
                 param.Add("extra", extra);
-            service.Show("RemoveConfirmation", param, callback, "Popup");
+            service.Show("ConfirmDeletion", param, callback, "Popup");
         }
         #endregion
     }

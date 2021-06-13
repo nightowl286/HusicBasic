@@ -1,0 +1,14 @@
+﻿<Window x:Class="HusicBasic.Views.PopupDialogWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com" MouseLeftButtonDown="Window_MouseLeftButtonDown" MouseLeftButtonUp="Window_MouseLeftButtonUp" AllowsTransparency="True" ShowInTaskbar="False" WindowStyle="None" Background="#7f000000" WindowStartupLocation="Manual" Loaded="Window_Loaded">
+    <Window.Resources>
+        <DoubleAnimation x:Key="animateInWidth" Storyboard.TargetProperty="Width" FillBehavior="Stop" Duration="0:0:0.15" AccelerationRatio="0.2"/>
+        <DoubleAnimation x:Key="animateInLeft" Storyboard.TargetProperty="Left" FillBehavior="Stop" Duration="0:0:0.15" AccelerationRatio="0.2"/>
+        <DoubleAnimation x:Key="animateInHeight" Storyboard.TargetProperty="Height" FillBehavior="Stop" DecelerationRatio="0.2" AccelerationRatio="0.2" Duration="0:0:0.15" BeginTime="0:0:0.25"/>
+        <DoubleAnimation x:Key="animateInTop" Storyboard.TargetProperty="Top" FillBehavior="Stop" DecelerationRatio="0.2" AccelerationRatio="0.2" Duration="0:0:0.15" BeginTime="0:0:0.25"/>
+        <DoubleAnimation x:Key="animateInOpacity" Storyboard.TargetProperty="Opacity" FillBehavior="Stop" From="0" To="1" Duration="0:0:0.3"/>
+        <DoubleAnimation x:Key="animateInContentOpacity" Storyboard.TargetProperty="(Window.Content).(UIElement.Opacity)" FillBehavior="Stop" From="0" To="1"
+                         BeginTime="0:0:0.5" Duration="0:0:0.25" AccelerationRatio="0.2"/>
+    </Window.Resources>
+</Window>

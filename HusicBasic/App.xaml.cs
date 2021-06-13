@@ -1,27 +1,27 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using DryIoc;
+using Hardcodet.Wpf.TaskbarNotification;
+using HusicBasic.Models.Tasks;
 using HusicBasic.Services;
+using HusicBasic.Services.Interfaces;
+using HusicBasic.ViewModels;
+using HusicBasic.ViewModels.Dialogs;
 using HusicBasic.Views;
+using HusicBasic.Views.Dialogs;
+using Prism.Commands;
 using Prism.Ioc;
+using Prism.Mvvm;
+using Prism.Regions;
+using Prism.Services.Dialogs;
 using TNO.Themes;
 using TNO.Themes.Transformations.Colors;
-using System.Collections.Generic;
-using System.Windows.Media;
-using System;
-using System.Diagnostics;
-using System.Linq;
-using Prism.Mvvm;
-using HusicBasic.ViewModels;
-using Prism.Commands;
-using Prism.Regions;
-using DryIoc;
-using Prism.Common;
-using Prism.Services.Dialogs;
-using HusicBasic.Models;
-using HusicBasic.Services.Interfaces;
-using HusicBasic.Models.Tasks;
-using System.IO;
-using System.Windows.Media.Imaging;
-using Hardcodet.Wpf.TaskbarNotification;
 
 namespace HusicBasic
 {
@@ -113,18 +113,16 @@ namespace HusicBasic
         {
             container.Register<AddSongTask>();
             container.Register<DownloadSongTask>();
-            //container.Register<TestTask>();
         }
         private void RegisterDialogs(IContainerRegistry container, IRegionManager manager)
         {
-           
+            container.RegisterDialogWindow<PopupDialogWindow>("Popup");
+            container.RegisterDialog<ConfirmDeletionDialog, ConfirmDeletionDialogViewModel>("ConfirmDeletion");
         }
         private void CreateGlobalCommands(IDialogService dialogService)
         {
-            GlobalCommands.ShowMainPlayer = new DelegateCommand(() => 
-            AttemptShowMainWindow());
-            GlobalCommands.ShowMiniPlayer = new DelegateCommand(() => 
-            AttemptShowWindow<MiniPlayer>(ref PlayerMiniWindow));
+            GlobalCommands.ShowMainPlayer = new DelegateCommand(() => AttemptShowMainWindow());
+            GlobalCommands.ShowMiniPlayer = new DelegateCommand(() => AttemptShowWindow<MiniPlayer>(ref PlayerMiniWindow));
             GlobalCommands.OpenUrl = new DelegateCommand<string>(OpenUrl);
             GlobalCommands.OpenYoutubeID = new DelegateCommand<string>(OpenYoutubeUrl);
             GlobalCommands.Exit = new DelegateCommand(() => App.Current.Shutdown());

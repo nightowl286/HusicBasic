@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using HusicBasic.Models;
 using HusicBasic.Models.Tasks;
 using HusicBasic.Services;
@@ -39,7 +41,6 @@ namespace HusicBasic.ViewModels
             Player = player;
             player.PropertyChanged += Player_PropertyChanged;
             _RegionManager = regionManager;
-            //_RegionManager.RegisterViewWithRegion("MainRegion", typeof(SongListOverview));
             _RegionManager.RegisterViewWithRegion("CurrentTaskRegion", typeof(CurrentTaskView));
 
             CreateCommands();

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using HusicBasic.Models;
 using HusicBasic.Services;
+using HusicBasic.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
+using Prism.Services.Dialogs;
 
 namespace HusicBasic.ViewModels
 {
@@ -21,8 +23,10 @@ namespace HusicBasic.ViewModels
         private SongModel _Song;
         private DelegateCommand _GoBackCommand;
         private DelegateCommand _SaveCommand;
+        private DelegateCommand _DeleteSongCommand;
         private IRegionNavigationJournal _Journal;
         private readonly ISongStore SongStore;
+        private readonly IDialogService DialogService;
         #endregion
 
         #region Properties
@@ -35,15 +39,27 @@ namespace HusicBasic.ViewModels
         public SongModel Song { get => _Song; private set => SetProperty(ref _Song, value); }
         public DelegateCommand GoBackCommand { get => _GoBackCommand; private set => SetProperty(ref _GoBackCommand, value); }
         public DelegateCommand SaveCommand { get => _SaveCommand; private set => SetProperty(ref _SaveCommand, value); }
+        public DelegateCommand DeleteSongCommand { get => _DeleteSongCommand; private set => SetProperty(ref _DeleteSongCommand, value); }
         public IRegionNavigationJournal Journal { get => _Journal; private set => SetProperty(ref _Journal, value); }
         #endregion
-        public SongOverviewViewModel(ISongStore songStore)
+        public SongOverviewViewModel(ISongStore songStore, IDialogService dialog)
         {
             SongStore = songStore;
+            DialogService = dialog;
             SaveCommand = new DelegateCommand(Save).ObservesCanExecute(() => NewNameValid);
+            DeleteSongCommand = new DelegateCommand(ShowDeletionConfirmation);
         }
 
         #region Methods
+        private void ShowDeletionConfirmation() => DialogService.ConfirmDeletion(DeleteSong, Song);
+        private void DeleteSong(IDialogResult result)
+        {
+            if (result.Result == ButtonResult.Yes)
+            {
+                SongStore.Remove(Song);
+                GoBackCommand.Execute();
+            }
+        }
         private void NewNameChanged()
         {
             string trimmed = NewName.Trim();
