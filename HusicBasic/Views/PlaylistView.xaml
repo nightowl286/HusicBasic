@@ -15,7 +15,24 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="{Binding Name}" FontSize="14" FontWeight="Medium" Foreground="{DynamicResource Brush.Text}" VerticalAlignment="Center"/>
+            <TextBlock FontSize="14" FontWeight="Medium" Foreground="{DynamicResource Brush.Text}" VerticalAlignment="Center">
+                 <Hyperlink Command="{Binding ShowOverviewCommand}" CommandParameter="{Binding Playlist}">
+                    <Hyperlink.Style>
+                        <Style TargetType="{x:Type Hyperlink}">
+                        <Setter Property="Foreground" Value="{DynamicResource Brush.Text}"/>
+                        <Setter Property="Focusable" Value="False"/>
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                        <Setter Property="TextDecorations" Value=""/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Tint(100)}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    </Hyperlink.Style>
+                    <Run Text="{Binding Name, Mode=OneWay}"/>
+                </Hyperlink>
+            </TextBlock>
             <TextBlock Grid.Row="1" Foreground="{DynamicResource Brush.Text.Shade(50)}" FontSize="11" VerticalAlignment="Center" Margin="0,0,10,0">
                 <Run Text="{Binding SongCount,Mode=OneWay}" Foreground="{DynamicResource Brush.Accent}"/>
                 <Run Text="songs - avg. duration"/>

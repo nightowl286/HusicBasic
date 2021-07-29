@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace HusicBasic.ViewModels
         private DelegateCommand _PlayNextCommand;
         private DelegateCommand _AddQueueCommand;
         private DelegateCommand<PlaylistModel> _ShowOverviewCommand;
+        private ObservableCollection<SongModel> _Songs;
         private readonly IHusicPlayer Player;
         #endregion
 
@@ -38,12 +40,14 @@ namespace HusicBasic.ViewModels
         public DelegateCommand PlayCommand { get => _PlayCommand; private set => SetProperty(ref _PlayCommand, value); }
         public DelegateCommand PlayNextCommand { get => _PlayNextCommand; private set => SetProperty(ref _PlayNextCommand, value); }
         public DelegateCommand AddQueueCommand { get => _AddQueueCommand; private set => SetProperty(ref _AddQueueCommand, value); }
+        public ObservableCollection<SongModel> Songs { get => _Songs; private set => SetProperty(ref _Songs, value); }
         public DelegateCommand<PlaylistModel> ShowOverviewCommand { get => _ShowOverviewCommand; private set => SetProperty(ref _ShowOverviewCommand, value); }
         #endregion
         public PlaylistViewViewModel(PlaylistModel playlist, IHusicPlayer player, DelegateCommand<PlaylistModel> showPlaylistOverview)
         {
             Player = player;
             Playlist = playlist;
+            Songs = playlist.Songs;
 
             PlayCommand = new DelegateCommand(ExecutePlay);
             PlayNextCommand = new DelegateCommand(ExecutePlayNext);
@@ -58,10 +62,11 @@ namespace HusicBasic.ViewModels
             else if (e.PropertyName == nameof(PlaylistModel.Duration))
             {
                 Duration = Playlist.Duration.FormatNice();
-                UpdateAverageDuration();
+                AverageDuration = Playlist.GetAvgDuration().FormatNice();
             }
             else if (e.PropertyName == nameof(PlaylistModel.Title)) Name = Playlist.Title;
             else if (e.PropertyName == nameof(PlaylistModel.Count)) SongCount = Playlist.Count;
+            else if (e.PropertyName == nameof(PlaylistModel.Songs)) Songs = Playlist.Songs;
         }
         #endregion
 
@@ -76,16 +81,12 @@ namespace HusicBasic.ViewModels
 
             ID = Playlist.ID;
             Duration = Playlist.Duration.FormatNice();
-            UpdateAverageDuration();
+            AverageDuration = Playlist.GetAvgDuration().FormatNice();
             Name = Playlist.Title;
             SongCount = Playlist.Count;
+            Songs = Playlist.Songs;
         }
-        private void UpdateAverageDuration()
-        {
-            List<double> durations = new List<double>(Playlist.Songs.Select(s => s.Duration.TotalSeconds));
-            double correctedAverage = durations.GetCorrectedAverage();
-            AverageDuration = TimeSpan.FromSeconds(correctedAverage).FormatNice();
-        }
+        
         private void ExecutePlay()
         {
             Player.Queue.Clear(QueueSource.Queue);

@@ -22,8 +22,10 @@
                     <Color x:Key="Color.Background.Tint(8.2)">#2a2a2a</Color>
                     <Color x:Key="Color.Background.Tint(12.5)">#343434</Color>
                     <Color x:Key="Color.Background.Tint(17)">#3e3e3e</Color>
+                    <Color x:Key="Color.Background.Tint(22.5)">#4b4b4b</Color>
                     <Color x:Key="Color.Background.Tint(30)">#454545</Color>
                     <Color x:Key="Color.Text">#d7d7d7</Color>
+                    <Color x:Key="Color.Text.Tint(50)">#ebebeb</Color>
                     <Color x:Key="Color.Text.Tint(100)">#ffffff</Color>
                     <Color x:Key="Color.Text.Shade(25)">#a1a1a1</Color>
                     <Color x:Key="Color.Text.Shade(50)">#6b6b6b</Color>
@@ -45,6 +47,7 @@
                     <SolidColorBrush x:Key="Brush.Background.Tint(30)" Color="{DynamicResource Color.Background.Tint(30)}"/>
                     <SolidColorBrush x:Key="Brush.Text" Color="{DynamicResource Color.Text}"/>
                     <SolidColorBrush x:Key="Brush.Text.Tint(100)" Color="{DynamicResource Color.Text.Tint(100)}"/>
+                    <SolidColorBrush x:Key="Brush.Text.Tint(50)" Color="{DynamicResource Color.Text.Tint(50)}"/>
                     <SolidColorBrush x:Key="Brush.Text.Shade(25)" Color="{DynamicResource Color.Text.Shade(25)}"/>
                     <SolidColorBrush x:Key="Brush.Text.Shade(50)" Color="{DynamicResource Color.Text.Shade(50)}"/>
                     <SolidColorBrush x:Key="Brush.Text.Shade(25).Tint(50)" Color="{DynamicResource Color.Text.Shade(25).Tint(50)}"/>
@@ -129,6 +132,7 @@
                 <ResourceDictionary Source="Resources/Sliders.xaml"/>
                 <ResourceDictionary Source="Resources/ScrollBars.xaml"/>
                 <ResourceDictionary Source="Resources/ScrollViewers.xaml"/>
+                <ResourceDictionary Source="Resources/CheckBoxes.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

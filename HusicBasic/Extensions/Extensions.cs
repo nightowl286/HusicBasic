@@ -84,9 +84,13 @@ namespace HusicBasic
         public static double GetAverage(this IEnumerable<double> values)
         {
             double total = 0;
+            double c = 0;
             foreach (double val in values)
+            {
                 total += val;
-            return total;
+                c++;
+            }
+            return total / c;
         }
         #endregion
 
@@ -162,6 +166,8 @@ namespace HusicBasic
             param.Add("message", message);
             service.Show("Confirmation", param, callback, "Popup");
         }
+        public static void ConfirmDeletion(this IDialogService service, Action<IDialogResult> callback, PlaylistModel playlist)
+            => ConfirmDeletion(service, callback, "playlist", playlist.Title);
         public static void ConfirmDeletion(this IDialogService service, Action<IDialogResult> callback, SongModel song)
         {
             string extra = string.IsNullOrWhiteSpace(song.YoutubeID) ? null : "This will also remove the source file.";

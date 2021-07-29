@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
@@ -91,10 +92,14 @@ namespace HusicBasic.ViewModels
         private void Navigate(string target)
         {
             if (!string.IsNullOrWhiteSpace(target))
+            {
+                _RegionManager.Regions["MainRegion"].NavigationService.Journal.Clear();
                 _RegionManager.RequestNavigate("MainRegion", target, c => {
                     Debug.WriteLine($"MainRegion navigation to '{target}' - Success: {c.Result}");
                     if (c.Result != true) Debug.WriteLine($"Error: {c.Error}\n");
                 });
+            }
+
         }
         #endregion
     }

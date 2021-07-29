@@ -79,6 +79,11 @@ namespace HusicBasic.Services
         #endregion
 
         #region Methods
+        public bool ContainsByName(string name)
+        {
+            string trimmed = name.Trim();
+            return Playlists.Any(s => s.Title.Trim() == trimmed);
+        }
         public PlaylistModel AddNew(string title, IEnumerable<SongModel> songs)
         {
             var token = IDManager.ReserveNewID();

@@ -7,6 +7,7 @@ using System.Linq;
 using HusicBasic.Events;
 using HusicBasic.Models;
 using HusicBasic.Services;
+using HusicBasic.Views;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -54,7 +55,7 @@ namespace HusicBasic.ViewModels
         #region Events
         private void ShowPlaylistOverview(PlaylistModel Playlist)
         {
-            /*RegionManager.RequestNavigate("MainRegion", $"{nameof(PlaylistOverview)}",
+            RegionManager.RequestNavigate("MainRegion", $"{nameof(PlaylistOverview)}",
                 c => {
                     Debug.WriteLine($"Showing overview for '{Playlist.Title}' | Success: {c.Result}");
                     if (c.Result != true)
@@ -62,8 +63,8 @@ namespace HusicBasic.ViewModels
                 },
                 new NavigationParameters()
                 {
-                    {"Playlist", Playlist },
-                });*/
+                    {"playlist", Playlist },
+                });
         }
         private void PlaylistRemovedCallback(PlaylistModel Playlist)
         {

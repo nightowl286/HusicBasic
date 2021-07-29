@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Text;
 using HusicBasic.Events;
 using HusicBasic.Services;
@@ -99,6 +100,12 @@ namespace HusicBasic.Models
         }
         public void UpdateCount() => Count = Songs.Count;
         public void Save() => Store.Save(this);
+        public TimeSpan GetAvgDuration()
+        {
+            List<double> durations = new List<double>(Songs.Select(s => s.Duration.TotalSeconds));
+            double correctedAverage = durations.GetCorrectedAverage();
+            return TimeSpan.FromSeconds(correctedAverage);
+        }
         #endregion
 
         #region Equal and Compare

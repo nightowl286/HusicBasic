@@ -85,6 +85,7 @@ namespace HusicBasic
             containerRegistry.RegisterForNavigation<SongListOverview>();
             containerRegistry.RegisterForNavigation<PlaylistListOverview>();
             containerRegistry.RegisterForNavigation<SongOverview>();
+            containerRegistry.RegisterForNavigation<PlaylistOverview>();
             IRegionManager manager = Container.Resolve<IRegionManager>();
             RegisterDialogs(containerRegistry, manager);
             RegisterTasks(containerRegistry);

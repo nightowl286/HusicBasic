@@ -9,6 +9,7 @@ namespace HusicBasic.Services
     {
         #region Methods
         public PlaylistModel AddNew(string title, IEnumerable<SongModel> songs);
+        public bool ContainsByName(string name);
         #endregion
     }
 }
